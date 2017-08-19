@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <!---link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}"--->
+    </head>
+
+    <body>
+        <div class = 'header'>
+            <div><p>Catalog App</p></div>
+            <div class = 'login'><p>Login</p></div>
+        </div>
+    
+        <div class = 'item'> 
+            <h1>Edit Item</h1>      
+            
+            <form action="{{url_for('editItem', category_name = item.category.name, item_name = item.name)}}" method = 'post'>
+            
+            <dl>
+                <dt>Title</dt>
+                    <dd><input type ='text' size='30' name='name' placeholder = '{{item.name }}'></dd>
+                <dt>Description:</dt>
+                    <dd><textarea name = 'description' rows='5' cols='40' placeholder = '{{item.description }}'></textarea></dd>
+                
+                <select name="category_id">
+                    {% for c in categories %}
+                    {% if c.name == item.category.name %}
+                    <option value="{{c.id}}" selected>{{c.name}}</option>
+                    {%else%}
+                    <option value="{{c.id}}">{{c.name}}</option>
+                    {% endif %}
+                    {% endfor %}
+                </select>    
+            
+            
+            <input type='submit', value = 'Submit'>
+            
+            </form>
+        </div>
+  
+    </body>
+</html>

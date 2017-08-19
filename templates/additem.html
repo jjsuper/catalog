@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <!---link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}"--->
+    </head>
+
+    <body>
+        <div class = 'header'>
+            <div><p>Catalog App</p></div>
+            <div class = 'login'><p>Login</p></div>
+        </div>
+    
+        <div class = 'item'> 
+            <h1>Edit Item</h1>      
+            
+            <form action="{{url_for('addItem')}}" method = 'post'>
+            
+            <dl>
+                <dt>Title</dt>
+                    <dd><input type ='text' size='30' name='name' placeholder = 'Title'></dd>
+                <dt>Description:</dt>
+                    <dd><textarea name = 'description' rows='5' cols='40' placeholder = 'Description'></textarea></dd>
+                <dt>Category</dt>
+                    <dd><input type ='text' size='30' name='category_name' placeholder = 'Category'></dd>
+ 
+            
+            
+            <input type='submit', value = 'Submit'>
+            
+            </form>
+        </div>
+  
+    </body>
+</html>

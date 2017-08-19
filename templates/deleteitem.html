@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <!---link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}"--->
+    </head>
+
+    <body>
+        <div class = 'header'>
+            <div><p>Catalog App</p></div>
+            <div class = 'login'><p>Login</p></div>
+        </div>
+    
+        <div class = 'item'> 
+            <h1>Delete Item</h1>
+            <p>Are you sure you want to delete?</p>
+            <form action="{{url_for('deleteItem', category_name = category_name, item_name = item.name)}}" method = 'post'>
+            <input type='submit', value = 'Submit'>
+            </form>
+        </div>
+  
+    </body>
+</html>
