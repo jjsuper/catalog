@@ -1,33 +1,30 @@
 <html>
     <head>
-        <!---link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}"--->
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
     </head>
 
     <body>
-        <div class = 'header'>
-            <div><p>Catalog App</p></div>
-            <div class = 'login'><p>Login</p></div>
-        </div>
-    
+        {% include "header.html" %}
+    <div class = 'container'>
         <div class = 'item'> 
-            <h1>Edit Item</h1>      
+            <h2>Edit Item</h2>      
             
             <form action="{{url_for('addItem')}}" method = 'post'>
             
             <dl>
                 <dt>Title</dt>
-                    <dd><input type ='text' size='30' name='name' placeholder = 'Title'></dd>
+                    <input  class = 'form' type ='text' size='38' name='name' placeholder = 'Title'>
                 <dt>Description:</dt>
-                    <dd><textarea name = 'description' rows='5' cols='40' placeholder = 'Description'></textarea></dd>
+                    <textarea class = 'form' name = 'description' rows='5' cols='40' placeholder = 'Description'></textarea>
                 <dt>Category</dt>
-                    <dd><input type ='text' size='30' name='category_name' placeholder = 'Category'></dd>
+                    <input class = 'form' type ='text' size='38' name='category_name' placeholder = 'Category'>
  
+            </dl>
             
-            
-            <input type='submit', value = 'Submit'>
+            <input class = 'submit' type='submit', value = 'Submit'>
             
             </form>
         </div>
-  
+    </div>
     </body>
 </html>

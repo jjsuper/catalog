@@ -1,11 +1,9 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}" >
     </head>
 
     <body>
-       
-<div class = "header">
         {% include "header.html" %}
         <div class = 'container'>
         <div class = 'nav'>
@@ -19,20 +17,19 @@
         
         </div>
         
-        
+
         <div class = 'right'> 
             <div class = 'content'>
-            <h2>{{category.name}} Items ({{items.count()}} items)</h2>
+            <h2>Latest Items</h2>
             <ul class = 'list' style="list-style-type:none">
             {% for i in items %}
-            <li><a href = "{{url_for('item', category_name = category.name, item_name=i.name)}}">{{i.name}}</a>
+            <li><a href = "{{url_for('item', category_name = i.category.name, item_name=i.name)}}">{{i.name}}</a>
+            <i>({{i.category.name}})</i>
             
             </li>
             {% endfor %}
             </div>
         </div>
-   
-
         </div>
   
     </body>

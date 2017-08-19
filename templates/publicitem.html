@@ -9,11 +9,6 @@
         <div class = 'item'> 
             <h2>{{item.name}}</h2>
             <p>{{item.description}}</p>
-            <p>
-            <a class='inline-a' href = "{{url_for('editItem', category_name = item.category.name, item_name=item.name)}}">Edit</a>
-            <text>|</text>
-            <a class='inline-a' href = "{{url_for('deleteItem', category_name = item.category.name, item_name=item.name)}}">Delete</a>
-            </p>
         </div>
     </div>
     </body>
