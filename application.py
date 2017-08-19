@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
-from sqlalchemy import create_engine
+from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
+from sqlalchemy import create_engine, DateTime
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Category, Item
+from datetime import datetime
+
+
 
 app = Flask(__name__)
 
@@ -30,10 +33,10 @@ def cataglogJSON():
 
 
 @app.route('/')
-@app.route('/catalog')
+@app.route('/catalog/')
 def cataglog():
     categories = session.query(Category)
-    items = session.query(Item).order_by(Item.id.desc())
+    items = session.query(Item).order_by(Item.date.desc())
     return render_template(
         'catalog.html', categories = categories, items = items)
 
@@ -62,9 +65,11 @@ def addItem():
             category = Category(name=request.form['category_name'])
             session.add(category)
             session.commit()
-        newItem = Item(name=request.form['name'], description=request.form['description'], category=category)
-        session.add(newItem)
-        session.commit()
+        item = session.query(Item).filter_by(category=category, name=request.form['name']).all()
+        if not item:
+            newItem = Item(name=request.form['name'], description=request.form['description'], category=category, date=datetime.now())
+            session.add(newItem)
+            session.commit()
         return redirect(url_for('category', category_name=category.name))
     else:
         return render_template('additem.html')
@@ -83,6 +88,7 @@ def editItem(category_name, item_name):
             category_id = request.form['category_id']
             category = session.query(Category).filter_by(id=category_id).one()
             editItem.category = category
+        editItem.date = datetime.now()
         session.add(editItem)
         session.commit()
         return redirect(url_for('category', category_name=category_name))
@@ -93,7 +99,8 @@ def editItem(category_name, item_name):
 @app.route('/catalog/<string:category_name>/<string:item_name>/delete',
            methods=['GET', 'POST'])
 def deleteItem(category_name, item_name):
-    itemToDelete = session.query(Item).filter_by(name=item_name).one()
+    category = session.query(Category).filter_by(name=category_name).one()
+    itemToDelete = session.query(Item).filter_by(category=category, name=item_name).one()
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()

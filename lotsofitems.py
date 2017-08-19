@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from datetime import datetime
 
 from database_setup import Base, Category, Item
 
@@ -70,7 +71,7 @@ item1 = Item(name="Soccer Cleats", description='''Football boots, called
  outsole to aid grip. From simple and humble beginnings football boots
  have come a long way and today find themselves subject to much research,
  development, sponsorship and marketing at the heart of a multi-national
- global industry.''', category=category1)
+ global industry.''', date=datetime(2017, 8, 8, 1, 1, 1), category=category1)
 session.add(item1)
 session.commit()
 
@@ -80,14 +81,14 @@ item2 = Item(name="Jersey", description='''A jersey is an item of knitted
  pullover, as it does not open at the front, unlike a cardigan. It is
  usually close-fitting and machine knitted in contrast to a guernsey that
  is more often hand knit with a thicker yarn. The word is usually used
- interchangeably with sweater.''', category=category1)
+ interchangeably with sweater.''',  date=datetime(2017, 8, 8, 1, 1, 2), category=category1)
 session.add(item2)
 session.commit()
 
 # Item Jersey for Baseball
 item3 = Item(name="Bat", description='''A baseball bat is a smooth wooden
  or metal club used in the sport of baseball to hit the ball after it is
- thrown by the pitcher.''', category=category3)
+ thrown by the pitcher.''',  date=datetime(2017, 8, 8, 1, 1, 3), category=category3)
 session.add(item3)
 session.commit()
 
@@ -98,7 +99,7 @@ item4 = Item(name="Frisbee", description='''A frisbee (also called a flying
  lip,[1] used recreationally and competitively for throwing and catching, for
  example, in flying disc games. The shape of the disc, an airfoil in
  cross-section, allows it to fly by generating lift as it moves through the
- air while spinning.''', category=category4)
+ air while spinning.''',  date=datetime(2017, 8, 8, 1, 1, 4), category=category4)
 session.add(item4)
 session.commit()
 
@@ -109,7 +110,7 @@ item5 = Item(name="Shinguards", description='''A shin guard or shin pad is a
  (soccer), baseball, ice hockey, field hockey, lacrosse, rugby, cricket, and
  other sports. This is due to either being required by the rules/laws of the
  sport or worn voluntarily by the participants for protective measures.''',
-category=category1)
+ date=datetime(2017, 8, 8, 1, 1, 5), category=category1)
 session.add(item5)
 session.commit()
 
@@ -120,14 +121,14 @@ item6 = Item(name="Two Shinguards", description='''A shin guard or shin pad is
  (soccer), baseball, ice hockey, field hockey, lacrosse, rugby, cricket, and
  other sports. This is due to either being required by the rules/laws of the
  sport or worn voluntarily by the participants for protective measures.''',
-category=category1)
+ date=datetime(2017, 8, 8, 1, 1, 6), category=category1)
 session.add(item6)
 session.commit()
 
 # Item Snowboard for Snowboarding
 item7 = Item(name="Snowboard", description='''Snowboards are boards that are
  usually the width of one's foot longways, with the ability to glide on snow.
-''', category=category5)
+''',  date=datetime(2017, 8, 8, 1, 1, 7), category=category5)
 session.add(item7)
 session.commit()
 
@@ -135,14 +136,14 @@ session.commit()
 item8 = Item(name="Goggles", description='''Goggles, or safety glasses, are
  forms of protective eyewear that usually enclose or protect the area
  surrounding the eye in order to prevent particulates, water or chemicals
- from striking the eyes.''', category=category5)
+ from striking the eyes.''',  date=datetime(2017, 8, 8, 1, 1, 8), category=category5)
 session.add(item8)
 session.commit()
 
 # Item Stick for Hockey
 item9 = Item(name="Stick", description='''A hockey stick is a piece of
  equipment used by the players in most forms of hockey to move the ball
- or puck.''', category=category9)
+ or puck.''',  date=datetime(2017, 8, 8, 1, 1, 9), category=category9)
 session.add(item9)
 session.commit()
 

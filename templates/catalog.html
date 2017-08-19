@@ -8,13 +8,12 @@
             <div><p>Catalog App</p></div>
             <div class = 'login'><p>Login</p></div>
         </div>
-
-        
+ 
         <div class = 'category'>
             <p>Categories</p>
             <ul class = 'category_list' style="list-style-type:none">
             {% for c in categories %}
-            <li><a href = '#'>{{c.name}}</a></li>
+            <li><a href = "{{url_for('category', category_name = c.name)}}">{{c.name}}</a></li>
            
             {% endfor %}
             </ul>
@@ -22,10 +21,11 @@
         </div>
         
         <div class = 'lastest_items'> 
+            <a href = "{{url_for('addItem')}}">Add Item</a>
             <p>Lastest Items</p>
             <ul class = 'lastest_items_list' style="list-style-type:none">
             {% for i in items %}
-            <li><a href = '#'>{{i.name}}</a>
+            <li><a href = "{{url_for('item', category_name = i.category.name, item_name=i.name)}}">{{i.name}}</a>
             <i>({{i.category.name}})</i>
             
             </li>
