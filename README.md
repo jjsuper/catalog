@@ -1,7 +1,7 @@
 # Item Catalog App Project
 
 Item catalog app is an application that provides a list of items within a variety of categories 
-as well as provide a user registration and authentication system. 
+as well as provide a user registration and authentication system.
 Registered users will have the ability to post, edit and delete their own items.
 
 # Quickstart
@@ -20,7 +20,7 @@ ptyhon lotsofitems.py
 
 # Usage
 
-Type **python application.py** to run the Flask web server. In your browser visit **http://localhost:8000** to view the item catalog app.  
+Type **python application.py** to run the Flask web server. In your browser visit **http://localhost:8000** to view the item catalog app.
 You should be able to view, add, and delete categories.
 You should be able to view, add, edit and delete items.
 
