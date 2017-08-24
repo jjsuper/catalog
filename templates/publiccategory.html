@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--html code for category page-->
+<!--html code for public category page-->
 <html>
     <head>
         <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
@@ -21,9 +21,6 @@
         
         <!--content-->        
         <div class="content"> 
-            <div class="option">
-                <a href="{{url_for('deleteCategory', category_name = category.name)}}">Delete</a>
-            </div>
             <h2>{{category.name}} Items ({{items.count()}} items)</h2>
             <ul style="list-style-type:none">
             {% for i in items %}

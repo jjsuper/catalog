@@ -1,7 +1,8 @@
+<!DOCTYPE html>
+<!--html code for login page-->
 <html>
-
 <head>
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
     <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="//apis.google.com/js/platform.js?onload=start"> </script>
@@ -9,9 +10,11 @@
 </head>
 
 <body>  
-
+    <!--header-->
     {% include "header.html" %}
-    <div class = 'container'>
+    
+    <!--content--> 
+    <div class="main">
 
     <!-- GOOGLE PLUS SIGN IN--> 
     <button class="signIn">
@@ -26,10 +29,8 @@
         data-approvalprompt="force">
         </span>
     </div>
-    
     </button>
-    
- 
+
     <script>
     function signInCallback(authResult) {
         if (authResult['code']) {
@@ -119,13 +120,8 @@
     </fb:login-button>
     </button>
     <!--END FACEBOOK SIGN IN -->
-    
-    
+
     <div id="result"></div>
-    
-    
-    
-    
     
     </div>
 </body>

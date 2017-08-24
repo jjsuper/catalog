@@ -1,52 +1,13 @@
-
+/* Global */
+* {
+    box-sizing: border-box;
+	font-family: "Calibri";
+}
 
 body {
     margin: 0;
-    background-color: rgb(220, 220, 220);
+    background-color: Gainsboro;
 }
-
-* {
-	font-family: "Calibri";
-    font-weight: 700;
-}
-
-.signIn{
-    display: block;
-    margin: 30px;
-}
-
-#result {
-    margin: 30px;
-}
-
-h2 {
-    display: block;
-    font-size: 35px;
-    -webkit-margin-before: 15px;
-    -webkit-margin-after: 15px;
-    -webkit-margin-start: 30px;
-    -webkit-margin-end: 30px;
-    font-weight: bold;
-    color: #06006f;
-}
-
-p {
-    display: block;
-    font-size: 25px;
-    -webkit-margin-start: 30px;
-    -webkit-margin-end: 30px;
-    color: black;
-}
-
-dt {
-    display: block;
-    font-size: 25px;
-    -webkit-margin-start: 30px;
-    -webkit-margin-end: 30px;
-    color: black;
-}
-
-
 
 a {
     text-decoration: none;
@@ -55,78 +16,66 @@ a {
     margin-left: 30px;
 }
 
+h2 {
+    font-size: 35px;
+    padding-left: 30px;
+    color: darkblue;
+}
+
 ul {
     color: orangered;
-    text-decoration: none;
     font-size: 25px;
     padding-left: 0;
 }
 
-.option {
-    display: block;
-    margin-top: 15px;
+p {
+    font-size: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: black;
 }
 
 
 
+/* Header */
 .header {
     position: fixed;
     width: 100%;
     height: 60px;
     color: white;
-    background-color: #06006f;
+    background-color: darkblue;
 }
 
-.top-title {
-    height: 100%;
+.title {
     float: left;
     padding-left: 15%;
 }
 
-.title {
-    display: inline;
+.title-hyperlink {
+    margin-left: 0;
     font-size: 45px;
-    -webkit-margin-before: 0px;
-    -webkit-margin-after: 0px;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
     font-weight: bold;
     color: white;
 }
 
-.login-button {
+.login {
     float:right;
     margin: 10px 15%;
     height: 40px;
     width: 100px;
-    background-color: #fd5d14;
+    background-color: orangered;
     text-align: center;
-    vertical-align: middle;
 }
 
-.form {
-    font-size: 25px;
-    margin-bottom: 15px;
-    margin-left: 30px;
-}
-
-.submit {
-    margin-left: 30px;
-    margin-bottom: 30px;
-}
-
-.login-a {
+.login-hyperlink {
     color: white;
     font-size: 30px;
     font-weight: bold;
-    margin: 0;
+    margin: auto;
 }
 
-.inline-a {
-    margin: 0;
-}
-
-.container {
+/* Main */
+.main {
     position : fixed;
     top: 80px;
     left: 15%;
@@ -135,22 +84,36 @@ ul {
     outline: grey solid thin;
 }
 
-
 .nav{
     float: left;
     width: 30%;
-    height: 100%;
 }
 
-.right {
+.content {
     float: right;
     width: 70%;
 }
 
-.content {
-    display: block;
-    width: 100%;
-    margin-bottom: 40px;
+.option {
+    margin-top: 30px;
+}
+
+.inline-link {
+    margin-left: 0;   
 }
 
 
+.form {
+    font-size: 25px;
+    margin-left: 30px;
+}
+
+/* Login */
+.signIn{
+    display: block;
+    margin: 30px;
+}
+
+#result {
+    margin: 30px;
+}

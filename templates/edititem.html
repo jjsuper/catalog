@@ -1,23 +1,24 @@
+<!DOCTYPE html>
+<!--html code for edit item page-->
 <html>
     <head>
-        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
     </head>
-
     <body>
+        <!--header-->  
         {% include "header.html" %}
-    <div class = 'container'>
-        <div class = 'item'> 
-            <h2>Edit Item</h2>      
-            
-            <form action="{{url_for('editItem', category_name = item.category.name, item_name = item.name)}}" method = 'post'>
-            
+        
+        <!--content-->         
+        <div class="main">
+            <h2>Edit Item</h2>
+            <form class="form" action="{{url_for('editItem', category_name = item.category.name, item_name = item.name)}}" method="post">
             <dl>
                 <dt>Title</dt>
-                    <input class = 'form' type ='text' size='38' name='name' placeholder = '{{item.name }}'>
+                    <input type="text" size="40" name="name" placeholder="{{item.name}}">
                 <dt>Description</dt>
-                    <textarea class = 'form'  name = 'description' rows='5' cols='40' placeholder = '{{item.description }}'></textarea>
+                    <textarea name="description" rows="5" cols="40" placeholder="{{item.description}}"></textarea>
                 <dt>Category</dt>
-                <select class = 'form'  name="category_id">
+                    <select name="category_id">
                     {% for c in categories %}
                     {% if c.name == item.category.name %}
                     <option value="{{c.id}}" selected>{{c.name}}</option>
@@ -25,13 +26,10 @@
                     <option value="{{c.id}}">{{c.name}}</option>
                     {% endif %}
                     {% endfor %}
-                </select>    
+                    </select> 
+                <dt><input type="submit" value="Submit"></dt>              
             </dl>
-            
-            <input class = 'submit' type='submit', value = 'Submit'>
-            
             </form>
         </div>
-    </div>
     </body>
 </html>

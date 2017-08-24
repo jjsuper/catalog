@@ -1,20 +1,22 @@
+<!DOCTYPE html>
+<!--html code for item page-->
 <html>
     <head>
-        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
     </head>
-
     <body>
+        <!--header-->  
         {% include "header.html" %}
-    <div class = 'container'>
-        <div class = 'item'> 
+        
+        <!--content-->  
+        <div class="main">
             <h2>{{item.name}}</h2>
             <p>{{item.description}}</p>
             <p>
-            <a class='inline-a' href = "{{url_for('editItem', category_name = item.category.name, item_name=item.name)}}">Edit</a>
-            <text>|</text>
-            <a class='inline-a' href = "{{url_for('deleteItem', category_name = item.category.name, item_name=item.name)}}">Delete</a>
+            <a class="inline-link" href="{{url_for('editItem', category_name = item.category.name, item_name=item.name)}}">Edit</a>
+            |
+            <a class="inline-link" href="{{url_for('deleteItem', category_name = item.category.name, item_name=item.name)}}">Delete</a>
             </p>
         </div>
-    </div>
     </body>
 </html>

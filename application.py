@@ -13,12 +13,9 @@ import json
 from flask import make_response
 import requests
 
-
 app = Flask(__name__)
 
-CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
-#APPLICATION_NAME = "Catalog App"
+CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
 
 # Connect to Database and create database session
 engine = create_engine('sqlite:///categoryitem.db')
@@ -234,10 +231,10 @@ def disconnect():
         del login_session['user_id']
         del login_session['provider']
         flash("You have successfully been logged out.")
-        return redirect(url_for('cataglog'))
+        return redirect(url_for('catalog'))
     else:
         flash("You were not logged in")
-        return redirect(url_for('cataglog'))    
+        return redirect(url_for('catalog'))    
 
 
         
@@ -263,7 +260,7 @@ def getUserID(email):
 
 
 @app.route('/catalog.json')
-def cataglogJSON():
+def catalogJSON():
     categories = session.query(Category).all()
     category_dict = [c.serialize for c in categories]
     for c in range(len(category_dict)):
@@ -280,7 +277,7 @@ def cataglogJSON():
 
 @app.route('/')
 @app.route('/catalog/')
-def cataglog():
+def catalog():
     categories = session.query(Category)
     items = session.query(Item).order_by(Item.date.desc())
     if 'username' not in login_session:
@@ -293,8 +290,11 @@ def category(category_name):
     categories = session.query(Category)
     category = session.query(Category).filter_by(name=category_name).one()
     items = session.query(Item).filter_by(category_id=category.id)
-    return render_template(
-        'category.html', categories=categories, category=category, items=items)
+    creator = getUserInfo(category.user_id)
+    if 'username' not in login_session or creator.id != login_session['user_id']:
+        return render_template('publiccategory.html', categories=categories, category=category, items=items)
+    else:
+        return render_template('category.html', categories=categories, category=category, items=items)
     #return "Selecting a specific category shows you all the items available for that category."
 
 @app.route('/catalog/<string:category_name>/<string:item_name>')
@@ -308,22 +308,49 @@ def item(category_name, item_name):
         return render_template('item.html', item=item)
     #return "Selecting a specific item shows you specific information of that item."
 
-@app.route('/catalog/new', methods=['GET', 'POST'])
-def addItem():
+
+@app.route('/catalog/newcategory', methods=['GET', 'POST'])
+def addCategory():
     if request.method == 'POST':
-        category = session.query(Category).filter_by(name=request.form['category_name']).all()
-        if not category:
-            category = Category(name=request.form['category_name'])
-            session.add(category)
-            session.commit()
-        item = session.query(Item).filter_by(category=category, name=request.form['name']).all()
-        if not item:
-            newItem = Item(name=request.form['name'], description=request.form['description'], category=category, date=datetime.now(), user_id=login_session['user_id'])
-            session.add(newItem)
-            session.commit()
+        if request.form['name']:
+            category = session.query(Category).filter_by(name=request.form['name']).one()
+            if not category:
+                category = Category(name=request.form['name'], user_id=login_session['user_id'])
+                session.add(category)
+                session.commit()
+            return redirect(url_for('category', category_name=category.name))
+        else:
+            return redirect(url_for('catalog'))
+    else:
+        return render_template('addcategory.html')
+    
+@app.route('/catalog/<string:category_name>/delete', methods=['GET', 'POST'])
+def deleteCategory(category_name):
+    categoryToDelete = session.query(Category).filter_by(name=category_name).one()
+    if request.method == 'POST':
+        itemsToDelete = session.query(Item).filter_by(category=categoryToDelete).all()
+        for item in itemsToDelete:
+            session.delete(item)
+        session.delete(categoryToDelete)
+        session.commit()
+        return redirect(url_for('catalog'))
+    else:
+        return render_template('deleteCategory.html', category_name=category_name)
+    
+@app.route('/catalog/newitem', methods=['GET', 'POST'])
+def addItem():
+    categories = session.query(Category)
+    if request.method == 'POST':
+        category = session.query(Category).filter_by(id=request.form['category_id']).one()
+        if request.form['name']:
+            item = session.query(Item).filter_by(category=category, name=request.form['name'])
+            if not item:
+                newItem = Item(name=request.form['name'], description=request.form['description'], category=category, date=datetime.now(), user_id=login_session['user_id'])
+                session.add(newItem)
+                session.commit()
         return redirect(url_for('category', category_name=category.name))
     else:
-        return render_template('additem.html')
+        return render_template('additem.html', categories=categories)
             
 @app.route('/catalog/<string:category_name>/<string:item_name>/edit',
            methods=['GET', 'POST'])
@@ -342,10 +369,9 @@ def editItem(category_name, item_name):
         editItem.date = datetime.now()
         session.add(editItem)
         session.commit()
-        return redirect(url_for('category', category_name=category_name))
+        return redirect(url_for('category', category_name=editItem.category.name))
     else:
         return render_template('edititem.html', categories=categories, item=editItem)
-    #return "edit item info"
 
 @app.route('/catalog/<string:category_name>/<string:item_name>/delete',
            methods=['GET', 'POST'])
@@ -358,7 +384,6 @@ def deleteItem(category_name, item_name):
         return redirect(url_for('category', category_name=category_name))
     else:
         return render_template('deleteItem.html', category_name=category_name, item=itemToDelete)
-    #return "delete item info"
     
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
