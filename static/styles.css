@@ -74,10 +74,23 @@ p {
     margin: auto;
 }
 
+/* Flash */
+.flash {
+    position: fixed;
+    top: 80px;
+    height: 20px;
+    font-size: 18px;
+    width: 70%;
+    left: 15%;
+    color: white;
+    text-align: center;
+    background-color: red;
+}
+
 /* Main */
 .main {
     position : fixed;
-    top: 80px;
+    top: 100px;
     left: 15%;
     width: 70%;
     background-color: white;
