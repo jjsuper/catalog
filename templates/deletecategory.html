@@ -11,8 +11,8 @@
         <!--content-->   
         <div class="main">
             <h2>Delete Item</h2>
-            <p>Are you sure you want to delete <b>{{category_name}}</b>?</p>
-            <form class="form" action="{{url_for('deleteCategory', category_name = category_name)}}" method="post">
+            <p>Are you sure you want to delete <b>{{category_id}}</b>?</p>
+            <form class="form" action="{{url_for('deleteCategory', category_id=category_id)}}" method="post">
             <dl><input type="submit" value="Submit"></dl>
             </form>
         </div>

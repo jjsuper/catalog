@@ -40,7 +40,8 @@ class Item(Base):
     date = Column(DateTime, default=datetime.now())
     description = Column(String(5000))
     category_id = Column(Integer, ForeignKey('category.id'))
-    category = relationship(Category)
+    # Implement the cascade property
+    category = relationship(Category, cascade="delete")
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
     

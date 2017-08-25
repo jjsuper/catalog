@@ -17,7 +17,7 @@
             <h2>Categories</h2>
             <ul style="list-style-type:none">
             {% for c in categories %}
-            <li><a href="{{url_for('category', category_name = c.name)}}">{{c.name}}</a></li>
+            <li><a href="{{url_for('category', category_id=c.id)}}">{{c.name}}</a></li>
             {% endfor %}
             </ul>
         </div>
@@ -31,7 +31,7 @@
             <ul style="list-style-type:none">
             {% for i in items %}
             <li>
-                <a href="{{url_for('item', category_name = i.category.name, item_name=i.name)}}">{{i.name}}</a>
+                <a href="{{url_for('item', category_id=i.category.id, item_id=i.id)}}">{{i.name}}</a>
                 <i>({{i.category.name}})</i>
             </li>
             {% endfor %}
